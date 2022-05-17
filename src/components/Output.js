@@ -51,7 +51,6 @@ const Output = (props) => {
 
 const mapStateToProps = (state) => {
   const s = state.srcDoc;
-  console.log(s);
   return {
     html: s.html,
     css: s.css,

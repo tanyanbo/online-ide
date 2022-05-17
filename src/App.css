@@ -1,7 +1,7 @@
 .editor-container {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .App {
@@ -23,7 +23,7 @@
 }
 
 .resize-bar {
-    flex-grow: 1;
+    width: 2%;
     background-color: #000;
 }
 

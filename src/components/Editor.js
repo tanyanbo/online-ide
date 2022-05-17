@@ -12,7 +12,8 @@ import { change, changeIsRunning } from "../actions";
 import KEYS from "../actions/keys";
 
 const Editor = (props) => {
-  const { language, change, checked, isRunning, changeIsRunning } = props;
+  const { language, change, checked, isRunning, changeIsRunning, myRef } =
+    props;
   const [val, setVal] = useState("");
 
   const onChangeCode = (editor, data, value) => {
@@ -21,7 +22,7 @@ const Editor = (props) => {
 
   const clearCode = () => {
     setVal("");
-    props.change("", language[0]);
+    change("", KEYS[`CHANGE_${language[0]}`]);
   };
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const Editor = (props) => {
   }, [val, language, checked, change, isRunning, changeIsRunning]);
 
   return (
-    <div className="editor">
+    <div className="editor" ref={myRef}>
       <div className="editor-top">
         <h3>{language[0]}</h3>
         <button onClick={clearCode} className="reset-button">
@@ -53,6 +54,7 @@ const Editor = (props) => {
           lineWrapping: true,
           lint: true,
           theme: "material",
+          dragDrop: false,
         }}
         onBeforeChange={onChangeCode}
       />

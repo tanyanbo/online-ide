@@ -1,7 +1,6 @@
 import KEYS from "./keys";
 
 export function change(code, type) {
-  console.log(type);
   return {
     type,
     payload: code,
