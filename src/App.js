@@ -1,20 +1,23 @@
 import "./App.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import Editor from "./components/Editor";
-import formatOutputString from "./outputString";
+import { change } from "./actions";
+import { LANGUAGES } from "./Languages";
 
-function App() {
-  const [srcDoc, setSrcDoc] = useState("");
+function App(props) {
+  // const [srcDoc, setSrcDoc] = useState("");
   const [js, setJs] = useState("");
   const [html, setHtml] = useState("");
   const [css, setCss] = useState("");
   const [isChecked, setIsChecked] = useState(false);
-  // const [python, setPython] = useState("");
 
   useEffect(() => {
     if (isChecked) {
       const timer = setTimeout(() => {
-        setSrcDoc(formatOutputString(html, css, js));
+        props.change(html, "HTML");
+        props.change(js, "JS");
+        props.change(css, "CSS");
       }, 250);
       return () => clearTimeout(timer);
     }
@@ -24,17 +27,33 @@ function App() {
     setIsChecked(e.target.checked);
   };
 
+  const srcDoc = `
+        <html lang="en-US">
+          <head>
+            <title>Iframe</title>
+            <style>
+              ${props.css}
+            </style>
+          </head>
+          <body>
+            ${props.html}
+            <script>${props.js}</script>
+          </body>
+        </html>
+      `;
+
   const run = () => {
-    setSrcDoc(formatOutputString(html, css, js));
+    props.change(html, "HTML");
+    props.change(js, "JS");
+    props.change(css, "CSS");
   };
 
   return (
     <div className="App">
       <div className="editor-container">
-        <Editor onChange={setJs} language="javascript" />
-        <Editor onChange={setCss} language="css" />
-        <Editor onChange={setHtml} language="xml" setSrcDoc={setSrcDoc} />
-        {/*<Editor language="python" onChange={setPython} />*/}
+        <Editor onChange={setHtml} language={LANGUAGES.HTML} />
+        <Editor onChange={setCss} language={LANGUAGES.CSS} />
+        <Editor onChange={setJs} language={LANGUAGES.JS} />
       </div>
       <div className="buttons">
         <form className="run-checkbox">
@@ -56,4 +75,11 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  const s = state.changeSrcDoc;
+  return { html: s.html, css: s.css, js: s.js };
+};
+
+export default connect(mapStateToProps, {
+  change,
+})(App);

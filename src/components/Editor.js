@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
+import { connect } from "react-redux";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/xml/xml";
 import "codemirror/mode/css/css";
@@ -7,10 +8,10 @@ import "codemirror/mode/python/python";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "./Editor.css";
-import mapping from "../mapping";
+import { change } from "../actions";
 
 const Editor = (props) => {
-  const { onChange, language, setSrcDoc } = props;
+  const { language, onChange } = props;
   const [val, setVal] = useState("");
 
   const onChangeCode = (editor, data, value) => {
@@ -21,21 +22,21 @@ const Editor = (props) => {
   const resetCode = () => {
     setVal("");
     onChange("");
-    setSrcDoc("", "", "");
+    props.change("", language[0]);
   };
 
   return (
     <div className="editor">
       <div className="editor-top">
-        <h3>{mapping[language]}</h3>
+        <h3>{language[0]}</h3>
         <button onClick={resetCode} className="reset-button">
-          Reset
+          &#10060;
         </button>
       </div>
       <CodeMirror
         value={val}
         options={{
-          mode: language,
+          mode: language[1],
           lineNumbers: true,
           lineWrapping: true,
           lint: true,
@@ -47,4 +48,11 @@ const Editor = (props) => {
   );
 };
 
-export default Editor;
+const mapStateToProps = (state) => {
+  const s = state.changeSrcDoc;
+  return { html: s.html, css: s.css, js: s.js };
+};
+
+export default connect(mapStateToProps, {
+  change,
+})(Editor);

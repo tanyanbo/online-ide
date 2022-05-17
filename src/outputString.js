@@ -1,5 +1,5 @@
-const formatOutputString = (html, css, js) => {
-  const str = `
+const formatOutputString = ({ html, css, js }) => {
+  return `
         <html lang="en-US">
           <head>
             <title>Iframe</title>
@@ -13,8 +13,6 @@ const formatOutputString = (html, css, js) => {
           </body>
         </html>
       `;
-  console.log(str);
-  return str;
 };
 
 export default formatOutputString;

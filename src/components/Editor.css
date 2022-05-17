@@ -13,7 +13,13 @@
 }
 
 .reset-button {
-    height: 50%;
+    align-self: end;
+    border: none;
+    background-color: transparent;
+    font-size: medium;
+    transform: translateY(25px);
+    color: red;
+    z-index: 20;
 }
 
 
