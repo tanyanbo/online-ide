@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import Editor from "./components/Editor";
 
 function App() {
+  const [srcDoc, setSrcDoc] = useState("");
+  const [js, setJs] = useState("");
+  const [html, setHtml] = useState("");
+
+  useEffect(() => {
+    setSrcDoc(`
+    <html lang="en-US">
+      <body>
+        ${html}
+        <script>
+            ${js}
+        </script>
+      </body>
+    </html>
+    `);
+  }, [js, html]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="editor-container">
+        <Editor onChange={setJs} language="javascript" />
+        <Editor onChange={setHtml} language="xml" />
+      </div>
+      <iframe srcDoc={srcDoc} sandbox="allow-scripts" title="output" />
     </div>
   );
 }
