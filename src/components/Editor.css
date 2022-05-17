@@ -1,6 +1,6 @@
 .editor {
     text-align: start;
-    width: 48%;
+    width: 32%;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -15,4 +15,5 @@
 .reset-button {
     height: 50%;
 }
+
 

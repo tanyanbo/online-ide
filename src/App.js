@@ -7,30 +7,32 @@ function App() {
   const [srcDoc, setSrcDoc] = useState("");
   const [js, setJs] = useState("");
   const [html, setHtml] = useState("");
+  const [css, setCss] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   // const [python, setPython] = useState("");
 
   useEffect(() => {
     if (isChecked) {
       const timer = setTimeout(() => {
-        setSrcDoc(formatOutputString(html, undefined, js));
+        setSrcDoc(formatOutputString(html, css, js));
       }, 250);
       return () => clearTimeout(timer);
     }
-  }, [js, html, isChecked]);
+  }, [js, css, html, isChecked]);
 
   const changeRunState = (e) => {
     setIsChecked(e.target.checked);
   };
 
   const run = () => {
-    setSrcDoc(formatOutputString(html, undefined, js));
+    setSrcDoc(formatOutputString(html, css, js));
   };
 
   return (
     <div className="App">
       <div className="editor-container">
         <Editor onChange={setJs} language="javascript" />
+        <Editor onChange={setCss} language="css" />
         <Editor onChange={setHtml} language="xml" setSrcDoc={setSrcDoc} />
         {/*<Editor language="python" onChange={setPython} />*/}
       </div>
