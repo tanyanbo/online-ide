@@ -6,9 +6,10 @@ import "codemirror/mode/python/python";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "./Editor.css";
+import mapping from "../mapping";
 
 const Editor = (props) => {
-  const { onChange, language } = props;
+  const { onChange, language, setSrcDoc } = props;
   const [val, setVal] = useState("");
 
   const onChangeCode = (editor, data, value) => {
@@ -19,12 +20,13 @@ const Editor = (props) => {
   const resetCode = () => {
     setVal("");
     onChange("");
+    setSrcDoc("", undefined, "");
   };
 
   return (
     <div className="editor">
       <div className="editor-top">
-        <h3>{language}</h3>
+        <h3>{mapping[language]}</h3>
         <button onClick={resetCode} className="reset-button">
           Reset
         </button>

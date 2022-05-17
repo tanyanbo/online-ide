@@ -8,9 +8,16 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    font-family: sans-serif;
 }
 
 .run-button {
     width: 100px;
     margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
 }

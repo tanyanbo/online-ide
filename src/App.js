@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useEffect, useRef, useState } from "react";
 import Editor from "./components/Editor";
+import formatOutputString from "./outputString";
 
 function App() {
   const [srcDoc, setSrcDoc] = useState("");
@@ -12,14 +13,7 @@ function App() {
   useEffect(() => {
     if (isChecked) {
       const timer = setTimeout(() => {
-        setSrcDoc(`
-        <html lang="en-US">
-          <body>
-            ${html}
-            <script>${js}</script>
-          </body>
-        </html>
-      `);
+        setSrcDoc(formatOutputString(html, undefined, js));
       }, 250);
       return () => clearTimeout(timer);
     }
@@ -30,30 +24,25 @@ function App() {
   };
 
   const run = () => {
-    setSrcDoc(`
-        <html lang="en-US">
-          <body>
-            ${html}
-            <script>${js}</script>
-          </body>
-        </html>
-      `);
+    setSrcDoc(formatOutputString(html, undefined, js));
   };
 
   return (
     <div className="App">
-      <form>
-        <input type="checkbox" id="run" onChange={changeRunState} />
-        <label htmlFor="run">边写边运行</label>
-      </form>
       <div className="editor-container">
         <Editor onChange={setJs} language="javascript" />
-        <Editor onChange={setHtml} language="xml" />
+        <Editor onChange={setHtml} language="xml" setSrcDoc={setSrcDoc} />
         {/*<Editor language="python" onChange={setPython} />*/}
       </div>
-      <button className="run-button" disabled={isChecked} onClick={run}>
-        运行
-      </button>
+      <div className="buttons">
+        <form className="run-checkbox">
+          <input type="checkbox" id="run" onChange={changeRunState} />
+          <label htmlFor="run">边写边运行</label>
+        </form>
+        <button className="run-button" disabled={isChecked} onClick={run}>
+          运行
+        </button>
+      </div>
       <iframe
         srcDoc={srcDoc}
         sandbox="allow-scripts"
