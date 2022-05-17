@@ -10,23 +10,34 @@ function App() {
   // const [python, setPython] = useState("");
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setSrcDoc(`
+    if (isChecked) {
+      const timer = setTimeout(() => {
+        setSrcDoc(`
         <html lang="en-US">
           <body>
             ${html}
-            <script>
-                ${js}
-            </script>
+            <script>${js}</script>
           </body>
         </html>
       `);
-    }, 250);
-    return () => clearTimeout(timer);
-  }, [js, html]);
+      }, 250);
+      return () => clearTimeout(timer);
+    }
+  }, [js, html, isChecked]);
 
   const changeRunState = (e) => {
     setIsChecked(e.target.checked);
+  };
+
+  const run = () => {
+    setSrcDoc(`
+        <html lang="en-US">
+          <body>
+            ${html}
+            <script>${js}</script>
+          </body>
+        </html>
+      `);
   };
 
   return (
@@ -40,7 +51,7 @@ function App() {
         <Editor onChange={setHtml} language="xml" />
         {/*<Editor language="python" onChange={setPython} />*/}
       </div>
-      <button className="run-button" disabled={!isChecked}>
+      <button className="run-button" disabled={isChecked} onClick={run}>
         运行
       </button>
       <iframe
