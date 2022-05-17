@@ -1,8 +1,8 @@
 .editor {
-    text-align: start;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    flex-grow: 1;
 }
 
 .editor-top {
