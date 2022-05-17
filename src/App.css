@@ -1,8 +1,6 @@
 .editor-container {
     display: flex;
     width: 100%;
-    justify-content: start;
-    align-self: stretch;
     position: relative;
 }
 
@@ -25,10 +23,14 @@
 }
 
 .resize-bar {
-    width: 2%;
+    width: 20px;
     background-color: #000;
 }
 
 .resize-bar:hover {
     cursor: ew-resize;
+}
+
+.code-mirror pre {
+    word-break: break-all;
 }

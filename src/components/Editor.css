@@ -5,6 +5,14 @@
     flex-grow: 1;
 }
 
+.editor-full {
+    /*flex-grow: 1;*/
+    width: 33.3%;
+    /*flex-shrink: 1;*/
+    flex-basis: auto;
+    display: flex;
+}
+
 .editor-top {
     display: flex;
     justify-content: space-between;

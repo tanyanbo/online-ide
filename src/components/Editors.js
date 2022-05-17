@@ -4,92 +4,57 @@ import { LANGUAGES } from "../Languages";
 
 const Editors = () => {
   const [isDragging, setIsDragging] = useState(0);
-  const leftDraggableBarRef = useRef(null);
-  const rightDraggableBarRef = useRef(null);
-  const leftEditorRef = useRef(null);
-  const rightEditorRef = useRef(null);
-  const centerEditorRef = useRef(null);
+  const [rightWidth, setRightWidth] = useState(0);
+  const [leftWidth, setLeftWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [leftStart, setLeftStart] = useState(0);
+  const [rightStart, setRightStart] = useState(0);
+  const leftRef = useRef(null);
+  const centerRef = useRef(null);
+  const rightRef = useRef(null);
   const containerRef = useRef(null);
 
-  let x;
-
-  const handleMouseDownLeft = (e) => {
-    x = e.clientX;
+  const handleMouseDownLeft = () => {
     setIsDragging(1);
+    setRightWidth(rightRef.current.getBoundingClientRect().width);
+    setRightStart(centerRef.current.getBoundingClientRect().right);
+    setContainerWidth(containerRef.current.getBoundingClientRect().width);
   };
 
-  const handleMouseDownRight = (e) => {
-    x = e.clientX;
+  const handleMouseDownRight = () => {
     setIsDragging(2);
+    setLeftWidth(leftRef.current.getBoundingClientRect().width);
+    setLeftStart(centerRef.current.getBoundingClientRect().left);
+    setContainerWidth(containerRef.current.getBoundingClientRect().width);
   };
 
   const handleMouseMove = (e) => {
     if (isDragging === 0) return;
-    const containerWidth = containerRef.current.offsetWidth;
-    const barWidth = leftDraggableBarRef.current.offsetWidth;
-    const leftBar = leftDraggableBarRef.current;
-    const rightBar = rightDraggableBarRef.current;
-    const center = centerEditorRef.current;
-    const left = leftEditorRef.current;
-    const right = rightEditorRef.current;
-    x = e.clientX;
+
+    const x = e.clientX;
     if (isDragging === 1) {
-      leftBar.style.position = "absolute";
-      leftBar.style.left = x + "px";
-      leftBar.style.backgroundColor = "black";
-      leftBar.style.height = `${left.offsetHeight}px`;
-      left.style.width = `${x}px`;
-      left.style.flexGrow = "0";
-      center.style.position = "absolute";
-      center.style.left = `${left.offsetWidth + barWidth}px`;
-      center.style.flexGrow = "0";
-      center.style.right = `${
-        (containerWidth - 2 * barWidth) / 3 + barWidth
-      }px`;
-      rightBar.style.position = "absolute";
-      rightBar.style.left = `${
-        left.offsetWidth + barWidth + center.offsetWidth
-      }px`;
-      rightBar.style.backgroundColor = "black";
-      rightBar.style.height = `${left.offsetHeight}px`;
-      right.style.position = "absolute";
-      right.style.flexGrow = "0";
-      right.style.left = `${
-        left.offsetWidth + 2 * barWidth + center.offsetWidth
-      }px`;
-      right.style.width = `${
-        containerWidth - 2 * barWidth - center.offsetWidth - left.offsetWidth
+      centerRef.current.style.width = `${rightStart - x}px`;
+      rightRef.current.style.width = `${rightWidth}px`;
+      leftRef.current.style.width = `${
+        containerWidth -
+        rightRef.current.clientWidth -
+        centerRef.current.clientWidth
       }px`;
       return;
     }
-    leftBar.style.position = "absolute";
-    leftBar.style.left = x + "px";
-    leftBar.style.backgroundColor = "black";
-    leftBar.style.height = `${left.offsetHeight}px`;
-    left.style.width = `${x}px`;
-    left.style.flexGrow = "0";
-    center.style.position = "absolute";
-    center.style.left = `${left.offsetWidth + barWidth}px`;
-    center.style.flexGrow = "0";
-    center.style.right = `${(containerWidth - 2 * barWidth) / 3 + barWidth}px`;
-    rightBar.style.position = "absolute";
-    rightBar.style.left = `${
-      left.offsetWidth + barWidth + center.offsetWidth
-    }px`;
-    rightBar.style.backgroundColor = "black";
-    rightBar.style.height = `${left.offsetHeight}px`;
-    right.style.position = "absolute";
-    right.style.flexGrow = "0";
-    right.style.left = `${
-      left.offsetWidth + 2 * barWidth + center.offsetWidth
-    }px`;
-    right.style.width = `${
-      containerWidth - 2 * barWidth - center.offsetWidth - left.offsetWidth
-    }px`;
+    if (isDragging === 2) {
+      centerRef.current.style.width = `${x - leftStart}px`;
+      leftRef.current.style.width = `${leftWidth}px`;
+      rightRef.current.style.width = `${
+        containerWidth -
+        leftRef.current.clientWidth -
+        centerRef.current.clientWidth
+      }px`;
+    }
   };
 
-  const handleMouseUp = (e) => {
-    setIsDragging(false);
+  const handleMouseUp = () => {
+    setIsDragging(0);
   };
 
   return (
@@ -99,19 +64,17 @@ const Editors = () => {
       onMouseMove={handleMouseMove}
       ref={containerRef}
     >
-      <Editor language={LANGUAGES.HTML} myRef={leftEditorRef} />
-      <div
-        ref={leftDraggableBarRef}
-        className="resize-bar"
-        onMouseDown={handleMouseDownLeft}
-      ></div>
-      <Editor language={LANGUAGES.CSS} myRef={centerEditorRef} />
-      <div
-        ref={rightDraggableBarRef}
-        className="resize-bar"
-        onMouseDown={handleMouseDownRight}
-      ></div>
-      <Editor language={LANGUAGES.JS} myRef={rightEditorRef} />
+      <div className="editor-full" ref={leftRef}>
+        <Editor language={LANGUAGES.HTML} />
+      </div>
+      <div className="editor-full" ref={centerRef}>
+        <div className="resize-bar" onMouseDown={handleMouseDownLeft}></div>
+        <Editor language={LANGUAGES.CSS} />
+      </div>
+      <div className="editor-full" ref={rightRef}>
+        <div className="resize-bar" onMouseDown={handleMouseDownRight}></div>
+        <Editor language={LANGUAGES.JS} />
+      </div>
     </div>
   );
 };

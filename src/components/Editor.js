@@ -47,6 +47,7 @@ const Editor = (props) => {
         </button>
       </div>
       <CodeMirror
+        className="code-mirror"
         value={val}
         options={{
           mode: language[1],
@@ -54,7 +55,8 @@ const Editor = (props) => {
           lineWrapping: true,
           lint: true,
           theme: "material",
-          dragDrop: false,
+          // dragDrop: false,
+          matchBrackets: true,
         }}
         onBeforeChange={onChangeCode}
       />
