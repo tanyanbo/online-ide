@@ -26,7 +26,13 @@ function App() {
         <Editor onChange={setJs} language="javascript" />
         <Editor onChange={setHtml} language="xml" />
       </div>
-      <iframe srcDoc={srcDoc} sandbox="allow-scripts" title="output" />
+      <iframe
+        srcDoc={srcDoc}
+        sandbox="allow-scripts"
+        title="output"
+        height="500px"
+        width="100%"
+      />
     </div>
   );
 }

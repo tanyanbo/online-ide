@@ -15,9 +15,19 @@ const Editor = (props) => {
     onChange(value);
   };
 
+  const resetCode = () => {
+    setVal("");
+    onChange("");
+  };
+
   return (
     <div className="editor">
-      <h3>{language}</h3>
+      <div className="editor-top">
+        <h3>{language}</h3>
+        <button onClick={resetCode} className="reset-button">
+          Reset
+        </button>
+      </div>
       <CodeMirror
         value={val}
         options={{
@@ -25,6 +35,7 @@ const Editor = (props) => {
           lineNumbers: true,
           lineWrapping: true,
           lint: true,
+          theme: "material",
         }}
         onBeforeChange={onChangeCode}
       />
