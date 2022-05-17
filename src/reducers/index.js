@@ -1,16 +1,36 @@
+import KEYS from "../actions/keys";
+
 const { combineReducers } = require("redux");
 
-const changeSrcDoc = (state = { html: "" }, action) => {
+const checkbox = (state = { checked: false }, action) => {
   switch (action.type) {
-    case "CHANGE_HTML":
+    case KEYS.CHANGE_RUN_WHILE_TYPING:
+      return { ...state, checked: action.payload };
+    default:
+      return state;
+  }
+};
+
+const isRunning = (state = { isRunning: false }, action) => {
+  switch (action.type) {
+    case KEYS.CHANGE_RUN:
+      return { ...state, isRunning: action.payload };
+    default:
+      return state;
+  }
+};
+
+const srcDoc = (state = { html: "" }, action) => {
+  switch (action.type) {
+    case KEYS.CHANGE_HTML:
       return { ...state, html: action.payload };
-    case "CHANGE_CSS":
+    case KEYS.CHANGE_CSS:
       return { ...state, css: action.payload };
-    case "CHANGE_JS":
+    case KEYS.CHANGE_JS:
       return { ...state, js: action.payload };
     default:
       return state;
   }
 };
 
-export default combineReducers({ changeSrcDoc });
+export default combineReducers({ srcDoc, checkbox, isRunning });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import { connect } from "react-redux";
 import "codemirror/mode/javascript/javascript";
@@ -8,28 +8,40 @@ import "codemirror/mode/python/python";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "./Editor.css";
-import { change } from "../actions";
+import { change, changeIsRunning } from "../actions";
+import KEYS from "../actions/keys";
 
 const Editor = (props) => {
-  const { language, onChange } = props;
+  const { language, change, checked, isRunning, changeIsRunning } = props;
   const [val, setVal] = useState("");
 
   const onChangeCode = (editor, data, value) => {
     setVal(value);
-    onChange(value);
   };
 
-  const resetCode = () => {
+  const clearCode = () => {
     setVal("");
-    onChange("");
     props.change("", language[0]);
   };
+
+  useEffect(() => {
+    if (checked) {
+      const timer = setTimeout(() => {
+        change(val, KEYS[`CHANGE_${language[0]}`]);
+      }, 250);
+      return () => clearTimeout(timer);
+    }
+    if (isRunning) {
+      change(val, KEYS[`CHANGE_${language[0]}`]);
+      changeIsRunning(false);
+    }
+  }, [val, language, checked, change, isRunning, changeIsRunning]);
 
   return (
     <div className="editor">
       <div className="editor-top">
         <h3>{language[0]}</h3>
-        <button onClick={resetCode} className="reset-button">
+        <button onClick={clearCode} className="reset-button">
           &#10060;
         </button>
       </div>
@@ -49,10 +61,13 @@ const Editor = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const s = state.changeSrcDoc;
-  return { html: s.html, css: s.css, js: s.js };
+  return {
+    checked: state.checkbox.checked,
+    isRunning: state.isRunning.isRunning,
+  };
 };
 
 export default connect(mapStateToProps, {
   change,
+  changeIsRunning,
 })(Editor);

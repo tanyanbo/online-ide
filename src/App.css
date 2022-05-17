@@ -21,3 +21,12 @@
     justify-content: space-around;
     width: 30%;
 }
+
+.resize-bar {
+    flex-grow: 1;
+    background-color: #000;
+}
+
+.resize-bar:hover {
+    cursor: ew-resize;
+}
