@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/xml/xml";
+import "codemirror/mode/python/python";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "./Editor.css";
