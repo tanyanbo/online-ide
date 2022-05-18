@@ -69,32 +69,18 @@ const Editors = () => {
       ref={containerRef}
     >
       <Editor language={LANGUAGES.HTML} ref={leftRef} />
-      {/*<div className="editor-full-with-bar" ref={centerRef}>*/}
-      {/*  <div*/}
-      {/*    className="resize-bar"*/}
-      {/*    onMouseDown={handleMouseDownLeft}*/}
-      {/*    ref={leftBarRef}*/}
-      {/*  ></div>*/}
       <Editor
         language={LANGUAGES.CSS}
         hasBar={true}
         handleMouseDown={handleMouseDownLeft}
         ref={centerRef}
       />
-      {/*</div>*/}
-      {/*<div className="editor-full-with-bar" ref={rightRef}>*/}
-      {/*  <div*/}
-      {/*    className="resize-bar"*/}
-      {/*    onMouseDown={handleMouseDownRight}*/}
-      {/*    ref={rightBarRef}*/}
-      {/*  ></div>*/}
       <Editor
         language={LANGUAGES.JS}
         hasBar={true}
         handleMouseDown={handleMouseDownRight}
         ref={rightRef}
       />
-      {/*</div>*/}
     </div>
   );
 };
