@@ -5,18 +5,19 @@
     flex-grow: 1;
 }
 
-.editor-full {
-    /*flex-grow: 1;*/
-    width: 33.3%;
-    /*flex-shrink: 1;*/
-    flex-basis: auto;
-    display: flex;
+.editor-with-bar {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    grid-template-rows: 50px 1fr;
+    width: 300px;
 }
 
 .editor-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 50px;
+    grid-column: 1 / 3;
 }
 
 

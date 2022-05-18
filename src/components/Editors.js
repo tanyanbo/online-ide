@@ -14,6 +14,8 @@ const Editors = () => {
   const rightRef = useRef(null);
   const containerRef = useRef(null);
 
+  useEffect(() => {});
+
   const handleMouseDownLeft = () => {
     setIsDragging(1);
     setRightWidth(rightRef.current.getBoundingClientRect().width);
@@ -64,17 +66,33 @@ const Editors = () => {
       onMouseMove={handleMouseMove}
       ref={containerRef}
     >
-      <div className="editor-full" ref={leftRef}>
-        <Editor language={LANGUAGES.HTML} />
-      </div>
-      <div className="editor-full" ref={centerRef}>
-        <div className="resize-bar" onMouseDown={handleMouseDownLeft}></div>
-        <Editor language={LANGUAGES.CSS} />
-      </div>
-      <div className="editor-full" ref={rightRef}>
-        <div className="resize-bar" onMouseDown={handleMouseDownRight}></div>
-        <Editor language={LANGUAGES.JS} />
-      </div>
+      <Editor language={LANGUAGES.HTML} ref={leftRef} />
+      {/*<div className="editor-full-with-bar" ref={centerRef}>*/}
+      {/*  <div*/}
+      {/*    className="resize-bar"*/}
+      {/*    onMouseDown={handleMouseDownLeft}*/}
+      {/*    ref={leftBarRef}*/}
+      {/*  ></div>*/}
+      <Editor
+        language={LANGUAGES.CSS}
+        hasBar={true}
+        handleMouseDown={handleMouseDownLeft}
+        myRef={centerRef}
+      />
+      {/*</div>*/}
+      {/*<div className="editor-full-with-bar" ref={rightRef}>*/}
+      {/*  <div*/}
+      {/*    className="resize-bar"*/}
+      {/*    onMouseDown={handleMouseDownRight}*/}
+      {/*    ref={rightBarRef}*/}
+      {/*  ></div>*/}
+      <Editor
+        language={LANGUAGES.JS}
+        hasBar={true}
+        handleMouseDown={handleMouseDownRight}
+        myRef={rightRef}
+      />
+      {/*</div>*/}
     </div>
   );
 };

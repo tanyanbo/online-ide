@@ -12,8 +12,16 @@ import { change, changeIsRunning } from "../actions";
 import KEYS from "../actions/keys";
 
 const Editor = (props) => {
-  const { language, change, checked, isRunning, changeIsRunning, myRef } =
-    props;
+  const {
+    language,
+    change,
+    checked,
+    isRunning,
+    changeIsRunning,
+    myRef,
+    hasBar,
+    handleMouseDown,
+  } = props;
   const [val, setVal] = useState("");
 
   const onChangeCode = (editor, data, value) => {
@@ -39,7 +47,10 @@ const Editor = (props) => {
   }, [val, language, checked, change, isRunning, changeIsRunning]);
 
   return (
-    <div className="editor" ref={myRef}>
+    <div className={hasBar ? "editor-with-bar" : "editor"} ref={myRef}>
+      {hasBar && (
+        <div className="resize-bar" onMouseDown={handleMouseDown}></div>
+      )}
       <div className="editor-top">
         <h3>{language[0]}</h3>
         <button onClick={clearCode} className="reset-button">
@@ -55,7 +66,7 @@ const Editor = (props) => {
           lineWrapping: true,
           lint: true,
           theme: "material",
-          // dragDrop: false,
+          dragDrop: false,
           matchBrackets: true,
         }}
         onBeforeChange={onChangeCode}
