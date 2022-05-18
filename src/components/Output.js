@@ -14,6 +14,11 @@ const Output = (props) => {
           </head>
           <body>
             ${props.html}
+            ${
+              props.optionalScript
+                ? `<script src="https://unpkg.com/typescript@latest/lib/typescriptServices.js"></script>`
+                : ""
+            }
             <script>${props.js}</script>
           </body>
         </html>
@@ -26,6 +31,8 @@ const Output = (props) => {
   const run = () => {
     changeIsRunning(true);
   };
+
+  console.log(srcDoc);
 
   return (
     <>
@@ -40,7 +47,7 @@ const Output = (props) => {
       </div>
       <iframe
         srcDoc={srcDoc}
-        sandbox="allow-scripts"
+        sandbox="allow-scripts allow-same-origin"
         title="output"
         height="500px"
         width="100%"
@@ -55,6 +62,7 @@ const mapStateToProps = (state) => {
     html: s.html,
     css: s.css,
     js: s.js,
+    optionalScript: s.optionalScript,
     checked: state.checkbox.checked,
   };
 };

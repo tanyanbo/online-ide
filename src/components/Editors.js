@@ -14,8 +14,6 @@ const Editors = () => {
   const rightRef = useRef(null);
   const containerRef = useRef(null);
 
-  useEffect(() => {});
-
   const handleMouseDownLeft = () => {
     setIsDragging(1);
     setRightWidth(rightRef.current.getBoundingClientRect().width);
@@ -47,8 +45,6 @@ const Editors = () => {
     if (isDragging === 2) {
       centerRef.current.style.width = `${x - leftStart}px`;
       leftRef.current.style.width = `${leftWidth}px`;
-      console.log("center width: " + centerRef.current.style.width);
-      console.log("left width: " + leftRef.current.style.width);
       rightRef.current.style.width = `${
         containerWidth -
         leftRef.current.clientWidth -
@@ -76,7 +72,7 @@ const Editors = () => {
         ref={centerRef}
       />
       <Editor
-        language={LANGUAGES.JS}
+        language={LANGUAGES.TS}
         hasBar={true}
         handleMouseDown={handleMouseDownRight}
         ref={rightRef}

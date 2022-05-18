@@ -33,6 +33,14 @@ const Editor = React.forwardRef((props, ref) => {
   };
 
   useEffect(() => {
+    if (language[0] === "TS") {
+      change(true, KEYS.INCLUDE_TYPESCRIPT_SCRIPT);
+    } else if (language[0] === "JS") {
+      change(false, KEYS.INCLUDE_TYPESCRIPT_SCRIPT);
+    }
+  }, [language, change]);
+
+  useEffect(() => {
     if (checked) {
       const timer = setTimeout(() => {
         change(val, KEYS[`CHANGE_${language[0]}`]);
