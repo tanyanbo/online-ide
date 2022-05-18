@@ -47,6 +47,8 @@ const Editors = () => {
     if (isDragging === 2) {
       centerRef.current.style.width = `${x - leftStart}px`;
       leftRef.current.style.width = `${leftWidth}px`;
+      console.log("center width: " + centerRef.current.style.width);
+      console.log("left width: " + leftRef.current.style.width);
       rightRef.current.style.width = `${
         containerWidth -
         leftRef.current.clientWidth -
@@ -77,7 +79,7 @@ const Editors = () => {
         language={LANGUAGES.CSS}
         hasBar={true}
         handleMouseDown={handleMouseDownLeft}
-        myRef={centerRef}
+        ref={centerRef}
       />
       {/*</div>*/}
       {/*<div className="editor-full-with-bar" ref={rightRef}>*/}
@@ -90,7 +92,7 @@ const Editors = () => {
         language={LANGUAGES.JS}
         hasBar={true}
         handleMouseDown={handleMouseDownRight}
-        myRef={rightRef}
+        ref={rightRef}
       />
       {/*</div>*/}
     </div>

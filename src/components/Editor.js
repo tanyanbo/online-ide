@@ -11,14 +11,13 @@ import "./Editor.css";
 import { change, changeIsRunning } from "../actions";
 import KEYS from "../actions/keys";
 
-const Editor = (props) => {
+const Editor = React.forwardRef((props, ref) => {
   const {
     language,
     change,
     checked,
     isRunning,
     changeIsRunning,
-    myRef,
     hasBar,
     handleMouseDown,
   } = props;
@@ -47,7 +46,7 @@ const Editor = (props) => {
   }, [val, language, checked, change, isRunning, changeIsRunning]);
 
   return (
-    <div className={hasBar ? "editor-with-bar" : "editor"} ref={myRef}>
+    <div className={hasBar ? "editor-with-bar" : "editor"} ref={ref}>
       {hasBar && (
         <div className="resize-bar" onMouseDown={handleMouseDown}></div>
       )}
@@ -73,7 +72,7 @@ const Editor = (props) => {
       />
     </div>
   );
-};
+});
 
 const mapStateToProps = (state) => {
   return {
@@ -82,7 +81,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  change,
-  changeIsRunning,
-})(Editor);
+export default connect(
+  mapStateToProps,
+  {
+    change,
+    changeIsRunning,
+  },
+  null,
+  { forwardRef: true }
+)(Editor);
