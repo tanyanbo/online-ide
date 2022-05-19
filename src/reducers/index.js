@@ -22,11 +22,11 @@ const isRunning = (state = { isRunning: false }, action) => {
 
 const srcDoc = (state = { html: "", js: "" }, action) => {
   switch (action.type) {
-    case KEYS.CHANGE_HTML:
+    case KEYS.CHANGE_1:
       return { ...state, html: action.payload };
-    case KEYS.CHANGE_CSS:
+    case KEYS.CHANGE_2:
       return { ...state, css: action.payload };
-    case KEYS.CHANGE_JS:
+    case KEYS.CHANGE_3:
       return { ...state, js: action.payload };
     default:
       return state;

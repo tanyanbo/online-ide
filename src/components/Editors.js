@@ -1,23 +1,22 @@
 import React, { useRef, useState } from "react";
 import Editor from "./Editor";
 import { LANGUAGES } from "../shared/Languages";
+import { connect } from "react-redux";
 
-const Editors = () => {
+const Editors = (props) => {
   const [isDragging, setIsDragging] = useState(0);
   const [rightWidth, setRightWidth] = useState(0);
   const [leftWidth, setLeftWidth] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
   const [leftStart, setLeftStart] = useState(0);
   const [rightStart, setRightStart] = useState(0);
-  const [chosenLanguages, setChosenLanguages] = useState([
-    LANGUAGES.HTML,
-    LANGUAGES.CSS,
-    LANGUAGES.JS,
-  ]);
   const leftRef = useRef(null);
   const centerRef = useRef(null);
   const rightRef = useRef(null);
   const containerRef = useRef(null);
+
+  const { languages } = props;
+  const chosenLanguages = languages.split("+");
 
   const handleMouseDownLeft = () => {
     setIsDragging(1);
@@ -69,21 +68,27 @@ const Editors = () => {
       onMouseMove={handleMouseMove}
       ref={containerRef}
     >
-      <Editor language={chosenLanguages[0]} ref={leftRef} />
+      <Editor language={LANGUAGES[chosenLanguages[0]]} ref={leftRef} pos="1" />
       <Editor
-        language={chosenLanguages[1]}
+        language={LANGUAGES[chosenLanguages[1]]}
         hasBar={true}
         handleMouseDown={handleMouseDownLeft}
         ref={centerRef}
+        pos="2"
       />
       <Editor
-        language={chosenLanguages[2]}
+        language={LANGUAGES[chosenLanguages[2]]}
         hasBar={true}
         handleMouseDown={handleMouseDownRight}
         ref={rightRef}
+        pos="3"
       />
     </div>
   );
 };
 
-export default Editors;
+const mapStateToProps = (state) => {
+  return { languages: state.languages.languages };
+};
+
+export default connect(mapStateToProps)(Editors);

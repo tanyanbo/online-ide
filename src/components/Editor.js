@@ -20,6 +20,7 @@ const Editor = React.forwardRef((props, ref) => {
     changeIsRunning,
     hasBar,
     handleMouseDown,
+    pos,
   } = props;
   const [val, setVal] = useState("");
 
@@ -29,21 +30,21 @@ const Editor = React.forwardRef((props, ref) => {
 
   const clearCode = () => {
     setVal("");
-    change("", KEYS[`CHANGE_${language[0]}`]);
+    change("", KEYS[`CHANGE_${pos}`]);
   };
 
   useEffect(() => {
     if (checked) {
       const timer = setTimeout(() => {
-        change(val, KEYS[`CHANGE_${language[0]}`]);
+        change(val, KEYS[`CHANGE_${pos}`]);
       }, 250);
       return () => clearTimeout(timer);
     }
     if (isRunning) {
-      change(val, KEYS[`CHANGE_${language[0]}`]);
+      change(val, KEYS[`CHANGE_${pos}`]);
       changeIsRunning(false);
     }
-  }, [val, language, checked, change, isRunning, changeIsRunning]);
+  }, [val, language, pos, checked, change, isRunning, changeIsRunning]);
 
   return (
     <div className={hasBar ? "editor-with-bar" : "editor"} ref={ref}>

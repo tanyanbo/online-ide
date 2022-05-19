@@ -18,8 +18,6 @@ const Output = (props) => {
     changeIsRunning(true);
   };
 
-  console.log(srcDoc);
-
   return (
     <>
       <div className="buttons">
