@@ -1,29 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { changeRunWhileTyping, changeIsRunning } from "../actions";
+import OUTPUT_STRING from "../shared/outputString";
 
 const Output = (props) => {
   const { changeIsRunning, changeRunWhileTyping } = props;
-  const srcDoc = `
-        <html lang="en-US">
-          <head>
-            <title>Iframe</title>
-            <style>
-              ${props.css}
-            </style>
-          </head>
-          <body>
-            ${props.html}
-            ${
-              props.optionalScript
-                ? `<script src="https://unpkg.com/typescript@latest/lib/typescriptServices.js"></script>`
-                : ""
-            }
-            <script>${props.js}</script>
-          </body>
-        </html>
-      `;
-
+  const srcDoc = OUTPUT_STRING[props.languages](
+    props.html,
+    props.css,
+    props.js
+  );
   const changeRunState = (e) => {
     changeRunWhileTyping(e.target.checked);
   };
@@ -57,13 +43,12 @@ const Output = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const s = state.srcDoc;
   return {
-    html: s.html,
-    css: s.css,
-    js: s.js,
-    optionalScript: s.optionalScript,
+    html: state.srcDoc.html,
+    css: state.srcDoc.css,
+    js: state.srcDoc.js,
     checked: state.checkbox.checked,
+    languages: state.languages.languages,
   };
 };
 

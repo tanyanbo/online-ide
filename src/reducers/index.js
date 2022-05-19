@@ -20,7 +20,7 @@ const isRunning = (state = { isRunning: false }, action) => {
   }
 };
 
-const srcDoc = (state = { html: "", optionalScript: false }, action) => {
+const srcDoc = (state = { html: "", js: "" }, action) => {
   switch (action.type) {
     case KEYS.CHANGE_HTML:
       return { ...state, html: action.payload };
@@ -28,11 +28,18 @@ const srcDoc = (state = { html: "", optionalScript: false }, action) => {
       return { ...state, css: action.payload };
     case KEYS.CHANGE_JS:
       return { ...state, js: action.payload };
-    case KEYS.INCLUDE_TYPESCRIPT_SCRIPT:
-      return { ...state, optionalScript: action.payload };
     default:
       return state;
   }
 };
 
-export default combineReducers({ srcDoc, checkbox, isRunning });
+const languages = (state = { languages: "HTML+CSS+TS" }, action) => {
+  switch (action.type) {
+    case KEYS.CHANGE_LANGUAGES:
+      return { ...state, languages: action.payload };
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ srcDoc, checkbox, isRunning, languages });

@@ -4,7 +4,7 @@ const KEYS = {
   CHANGE_CSS: 3,
   CHANGE_JS: 4,
   CHANGE_RUN: 5,
-  INCLUDE_TYPESCRIPT_SCRIPT: 6,
+  CHANGE_LANGUAGES: 6,
 };
 
 export default KEYS;

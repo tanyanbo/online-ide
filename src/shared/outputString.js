@@ -1,4 +1,4 @@
-const outputString = {
+const OUTPUT_STRING = {
   "HTML+CSS+JS": function (html, css, js) {
     return `
           <html lang="en-US">
@@ -16,6 +16,7 @@ const outputString = {
       `;
   },
   "HTML+CSS+TS": function (html, css, tsCode) {
+    tsCode = tsCode.replaceAll("'", '"').replaceAll("\n", "");
     return `        
         <html lang="en-US">
           <head>
@@ -28,7 +29,7 @@ const outputString = {
             ${html}
             <script src="https://unpkg.com/typescript@latest/lib/typescriptServices.js"></script>
             <script>
-              window.ts.transpile(${tsCode});
+              eval(window.ts.transpile('${tsCode}'));
             </script>
           </body>
         </html>
@@ -36,4 +37,4 @@ const outputString = {
   },
 };
 
-export default outputString;
+export default OUTPUT_STRING;

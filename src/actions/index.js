@@ -20,3 +20,10 @@ export function changeIsRunning(value) {
     payload: value,
   };
 }
+
+export function changeLanguages(value) {
+  return {
+    type: KEYS.CHANGE_LANGUAGES,
+    payload: value,
+  };
+}
