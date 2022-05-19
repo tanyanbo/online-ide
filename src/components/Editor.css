@@ -26,7 +26,7 @@
     border: none;
     background-color: transparent;
     font-size: medium;
-    transform: translateY(25px);
+    transform: translateY(25px) translateX(-10px);
     color: red;
     z-index: 20;
 }

@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Editor from "./Editor";
-import { LANGUAGES } from "../Languages";
+import { LANGUAGES } from "../shared/Languages";
 
 const Editors = () => {
   const [isDragging, setIsDragging] = useState(0);
@@ -9,6 +9,11 @@ const Editors = () => {
   const [containerWidth, setContainerWidth] = useState(0);
   const [leftStart, setLeftStart] = useState(0);
   const [rightStart, setRightStart] = useState(0);
+  const [chosenLanguages, setChosenLanguages] = useState([
+    LANGUAGES.HTML,
+    LANGUAGES.CSS,
+    LANGUAGES.JS,
+  ]);
   const leftRef = useRef(null);
   const centerRef = useRef(null);
   const rightRef = useRef(null);
@@ -64,15 +69,15 @@ const Editors = () => {
       onMouseMove={handleMouseMove}
       ref={containerRef}
     >
-      <Editor language={LANGUAGES.HTML} ref={leftRef} />
+      <Editor language={chosenLanguages[0]} ref={leftRef} />
       <Editor
-        language={LANGUAGES.CSS}
+        language={chosenLanguages[1]}
         hasBar={true}
         handleMouseDown={handleMouseDownLeft}
         ref={centerRef}
       />
       <Editor
-        language={LANGUAGES.TS}
+        language={chosenLanguages[2]}
         hasBar={true}
         handleMouseDown={handleMouseDownRight}
         ref={rightRef}
