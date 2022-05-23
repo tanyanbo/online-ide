@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { changeRunWhileTyping, changeIsRunning } from "../actions";
 import OUTPUT_STRING from "../shared/outputString";
 
 const Output = (props) => {
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    iframeRef.current.contentWindow.onerror = function () {
+      console.log("my own error from iframe srcdoc");
+    };
+  }, []);
+
   const { changeIsRunning, changeRunWhileTyping } = props;
   const srcDoc = OUTPUT_STRING[props.languages](
     props.html,
@@ -30,6 +38,7 @@ const Output = (props) => {
         </button>
       </div>
       <iframe
+        ref={iframeRef}
         srcDoc={srcDoc}
         sandbox="allow-scripts allow-same-origin"
         title="output"

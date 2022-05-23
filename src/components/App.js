@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Output from "./Output";
 import Editors from "./Editors";
 import { connect } from "react-redux";
@@ -7,9 +7,18 @@ import { changeLanguages } from "../actions";
 
 function App(props) {
   const { changeLanguages } = props;
+  const [chosenLanguage, setChosenLanguage] = useState("");
+
+  useEffect(() => {
+    const localStorageLanguage = localStorage.getItem("language");
+    changeLanguages(`HTML+CSS+${localStorageLanguage}`);
+    setChosenLanguage(localStorageLanguage);
+  }, [changeLanguages]);
 
   const onChangeLanguage = (e) => {
     changeLanguages(`HTML+CSS+${e.target.value}`);
+    setChosenLanguage(e.target.value);
+    localStorage.setItem("language", e.target.value);
   };
 
   return (
@@ -21,6 +30,7 @@ function App(props) {
           name="language"
           value="JS"
           onChange={onChangeLanguage}
+          checked={chosenLanguage === "JS"}
         />
         <label htmlFor="js">JS</label>
         <input
@@ -29,6 +39,7 @@ function App(props) {
           name="language"
           value="TS"
           onChange={onChangeLanguage}
+          checked={chosenLanguage === "TS"}
         />
         <label htmlFor="ts">TS</label>
       </form>

@@ -19,7 +19,13 @@ const isRunning = (state = { isRunning: false }, action) => {
   }
 };
 
-const srcDoc = (state = { html: "", js: "" }, action) => {
+const srcDoc = (
+  state = {
+    html: "",
+    js: "",
+  },
+  action
+) => {
   switch (action.type) {
     case KEYS.CHANGE_1:
       return { ...state, html: action.payload };
