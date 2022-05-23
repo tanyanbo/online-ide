@@ -10,7 +10,11 @@ function App(props) {
   const [chosenLanguage, setChosenLanguage] = useState("");
 
   useEffect(() => {
-    const localStorageLanguage = localStorage.getItem("language");
+    let localStorageLanguage = localStorage.getItem("language");
+    if (!localStorageLanguage) {
+      localStorage.setItem("language", "JS");
+      localStorageLanguage = "JS";
+    }
     changeLanguages(`HTML+CSS+${localStorageLanguage}`);
     setChosenLanguage(localStorageLanguage);
   }, [changeLanguages]);
