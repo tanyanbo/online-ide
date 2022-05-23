@@ -10,8 +10,23 @@ import "codemirror/theme/material.css";
 import "./Editor.css";
 import { change, changeIsRunning } from "../actions";
 import KEYS from "../actions/keys";
+import { RootState } from "../index";
 
-const Editor = React.forwardRef((props, ref) => {
+type Props = {
+  language: string[];
+  change: (code: string, type: number) => { type: number; payload: string };
+  checked: boolean;
+  isRunning: boolean;
+  changeIsRunning: (value: boolean) => {
+    type: number;
+    payload: boolean;
+  };
+  hasBar?: boolean;
+  handleMouseDown?: () => void;
+  pos: string;
+};
+
+const Editor = React.forwardRef((props: Props, ref) => {
   const {
     language,
     change,
@@ -22,29 +37,29 @@ const Editor = React.forwardRef((props, ref) => {
     handleMouseDown,
     pos,
   } = props;
-  const [val, setVal] = useState("");
+  const [code, setCode] = useState<string>("");
 
-  const onChangeCode = (editor, data, value) => {
-    setVal(value);
+  const onChangeCode = (editor: any, data: any, value: string) => {
+    setCode(value);
   };
 
   const clearCode = () => {
-    setVal("");
+    setCode("");
     change("", KEYS[`CHANGE_${pos}`]);
   };
 
   useEffect(() => {
     if (checked) {
       const timer = setTimeout(() => {
-        change(val, KEYS[`CHANGE_${pos}`]);
+        change(code, KEYS[`CHANGE_${pos}`]);
       }, 250);
       return () => clearTimeout(timer);
     }
     if (isRunning) {
-      change(val, KEYS[`CHANGE_${pos}`]);
+      change(code, KEYS[`CHANGE_${pos}`]);
       changeIsRunning(false);
     }
-  }, [val, language, pos, checked, change, isRunning, changeIsRunning]);
+  }, [code, language, pos, checked, change, isRunning, changeIsRunning]);
 
   return (
     <div className={hasBar ? "editor-with-bar" : "editor"} ref={ref}>
@@ -59,7 +74,7 @@ const Editor = React.forwardRef((props, ref) => {
       </div>
       <CodeMirror
         className="code-mirror"
-        value={val}
+        value={code}
         options={{
           mode: language[1],
           lineNumbers: true,
@@ -75,7 +90,7 @@ const Editor = React.forwardRef((props, ref) => {
   );
 });
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return {
     checked: state.checkbox.checked,
     isRunning: state.isRunning.isRunning,

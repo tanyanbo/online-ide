@@ -1,12 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { changeRunWhileTyping, changeIsRunning } from "../actions";
-import OUTPUT_STRING from "../shared/outputString";
+import OUTPUT_STRING from "../shared/outputString.ts";
 
 const Output = (props) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {
+    console.log("changed");
+    console.log(iframeRef.current.contentWindow);
     iframeRef.current.contentWindow.onerror = function () {
       console.log("my own error from iframe srcdoc");
     };
@@ -40,7 +42,7 @@ const Output = (props) => {
       <iframe
         ref={iframeRef}
         srcDoc={srcDoc}
-        sandbox="allow-scripts allow-same-origin"
+        sandbox="allow-scripts allow-same-origin allow-modals"
         title="output"
         height="500px"
         width="100%"

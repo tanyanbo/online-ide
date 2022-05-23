@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import Editor from "./Editor";
 import { LANGUAGES } from "../shared/Languages";
 import { connect } from "react-redux";
+import { RootState } from "../index";
 
-const Editors = (props) => {
+const Editors = (props: { languages: string }) => {
   const [isDragging, setIsDragging] = useState(0);
   const [rightWidth, setRightWidth] = useState(0);
   const [leftWidth, setLeftWidth] = useState(0);
@@ -16,23 +17,23 @@ const Editors = (props) => {
   const containerRef = useRef(null);
 
   const { languages } = props;
-  const chosenLanguages = languages.split("+");
+  const chosenLanguages: string[] = languages.split("+");
 
-  const handleMouseDownLeft = () => {
+  const handleMouseDownLeft: () => void = () => {
     setIsDragging(1);
     setRightWidth(rightRef.current.getBoundingClientRect().width);
     setRightStart(centerRef.current.getBoundingClientRect().right);
     setContainerWidth(containerRef.current.getBoundingClientRect().width);
   };
 
-  const handleMouseDownRight = () => {
+  const handleMouseDownRight: () => void = () => {
     setIsDragging(2);
     setLeftWidth(leftRef.current.getBoundingClientRect().width);
     setLeftStart(centerRef.current.getBoundingClientRect().left);
     setContainerWidth(containerRef.current.getBoundingClientRect().width);
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (isDragging === 0) return;
 
     const x = e.clientX;
@@ -87,7 +88,7 @@ const Editors = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   return { languages: state.languages.languages };
 };
 

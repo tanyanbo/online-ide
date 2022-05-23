@@ -1,7 +1,10 @@
 import KEYS from "../actions/keys";
 import { combineReducers } from "redux";
 
-const checkbox = (state = { checked: false }, action) => {
+const checkbox = (
+  state: { checked: boolean } = { checked: false },
+  action: { type: number; payload: boolean }
+) => {
   switch (action.type) {
     case KEYS.CHANGE_RUN_WHILE_TYPING:
       return { ...state, checked: action.payload };
@@ -10,7 +13,10 @@ const checkbox = (state = { checked: false }, action) => {
   }
 };
 
-const isRunning = (state = { isRunning: false }, action) => {
+const isRunning = (
+  state = { isRunning: false },
+  action: { type: number; payload: boolean }
+) => {
   switch (action.type) {
     case KEYS.CHANGE_RUN:
       return { ...state, isRunning: action.payload };
@@ -20,11 +26,11 @@ const isRunning = (state = { isRunning: false }, action) => {
 };
 
 const srcDoc = (
-  state = {
+  state: { html: string; css?: string; js: string } = {
     html: "",
     js: "",
   },
-  action
+  action: { type: number; payload: string }
 ) => {
   switch (action.type) {
     case KEYS.CHANGE_1:
@@ -38,7 +44,10 @@ const srcDoc = (
   }
 };
 
-const languages = (state = { languages: "HTML+CSS+JS" }, action) => {
+const languages = (
+  state: { languages: string } = { languages: "HTML+CSS+JS" },
+  action: { type: number; payload: string }
+) => {
   switch (action.type) {
     case KEYS.CHANGE_LANGUAGES:
       return { ...state, languages: action.payload };

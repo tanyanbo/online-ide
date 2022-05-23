@@ -1,4 +1,4 @@
-const KEYS = {
+const KEYS: { [index: string]: number } = {
   CHANGE_RUN_WHILE_TYPING: 1,
   CHANGE_1: 2,
   CHANGE_2: 3,

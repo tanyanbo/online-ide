@@ -5,9 +5,11 @@ import Editors from "./Editors";
 import { connect } from "react-redux";
 import { changeLanguages } from "../actions";
 
-function App(props) {
+function App(props: {
+  changeLanguages: (val: string) => { type: number; payload: string };
+}) {
   const { changeLanguages } = props;
-  const [chosenLanguage, setChosenLanguage] = useState("");
+  const [chosenLanguage, setChosenLanguage] = useState<string>("");
 
   useEffect(() => {
     let localStorageLanguage = localStorage.getItem("language");
@@ -19,7 +21,7 @@ function App(props) {
     setChosenLanguage(localStorageLanguage);
   }, [changeLanguages]);
 
-  const onChangeLanguage = (e) => {
+  const onChangeLanguage = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeLanguages(`HTML+CSS+${e.target.value}`);
     setChosenLanguage(e.target.value);
     localStorage.setItem("language", e.target.value);
