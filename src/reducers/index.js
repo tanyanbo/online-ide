@@ -1,6 +1,5 @@
 import KEYS from "../actions/keys";
-
-const { combineReducers } = require("redux");
+import { combineReducers } from "redux";
 
 const checkbox = (state = { checked: false }, action) => {
   switch (action.type) {
@@ -33,7 +32,7 @@ const srcDoc = (state = { html: "", js: "" }, action) => {
   }
 };
 
-const languages = (state = { languages: "HTML+CSS+TS" }, action) => {
+const languages = (state = { languages: "HTML+CSS+JS" }, action) => {
   switch (action.type) {
     case KEYS.CHANGE_LANGUAGES:
       return { ...state, languages: action.payload };
