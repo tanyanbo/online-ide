@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/xml/xml";
 import "codemirror/mode/css/css";
@@ -12,15 +12,21 @@ import { change, changeIsRunning } from "../actions";
 import KEYS from "../actions/keys";
 import { RootState } from "../index";
 
-type Props = {
+const mapStateToProps = (state: RootState) => {
+  return {
+    checked: state.checkbox.checked,
+    isRunning: state.isRunning.isRunning,
+  };
+};
+
+const connector = connect(mapStateToProps, { change, changeIsRunning });
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux & {
   language: string[];
-  change: (code: string, type: number) => { type: number; payload: string };
   checked: boolean;
   isRunning: boolean;
-  changeIsRunning: (value: boolean) => {
-    type: number;
-    payload: boolean;
-  };
   hasBar?: boolean;
   handleMouseDown?: () => void;
   pos: string;
@@ -90,19 +96,4 @@ const Editor = React.forwardRef((props: Props, ref) => {
   );
 });
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    checked: state.checkbox.checked,
-    isRunning: state.isRunning.isRunning,
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  {
-    change,
-    changeIsRunning,
-  },
-  null,
-  { forwardRef: true }
-)(Editor);
+export default connector(Editor);

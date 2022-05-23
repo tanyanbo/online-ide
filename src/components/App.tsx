@@ -4,10 +4,13 @@ import Output from "./Output";
 import Editors from "./Editors";
 import { connect } from "react-redux";
 import { changeLanguages } from "../actions";
+import { ConnectedProps } from "react-redux";
 
-function App(props: {
-  changeLanguages: (val: string) => { type: number; payload: string };
-}) {
+const connector = connect(null, { changeLanguages });
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function App(props: PropsFromRedux) {
   const { changeLanguages } = props;
   const [chosenLanguage, setChosenLanguage] = useState<string>("");
 
@@ -55,4 +58,4 @@ function App(props: {
   );
 }
 
-export default connect(null, { changeLanguages })(App);
+export default connector(App);
