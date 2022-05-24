@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import Editor from "./Editor";
-import { LANGUAGES } from "../shared/Languages";
+import LANGUAGES from "../shared/Languages";
 import { connect } from "react-redux";
-import { RootState } from "../index";
+import { RootState } from "../Root";
 
 const Editors = (props: { languages: string }) => {
   const [isDragging, setIsDragging] = useState(0);

@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Editor/> users can type into the codemirror window 1`] = `
+Array [
+  <div
+    className="editor"
+  >
+    <div
+      className="editor-top"
+    >
+      <h3>
+        HTML
+      </h3>
+      <button
+        className="reset-button"
+        onClick={[Function]}
+      >
+        ❌
+      </button>
+    </div>
+    <div
+      className="react-codemirror2 code-mirror"
+    />
+  </div>,
+  <div
+    className="buttons"
+  >
+    <form
+      className="run-checkbox"
+    >
+      <input
+        id="run"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="run"
+      >
+        边写边运行
+      </label>
+    </form>
+    <button
+      className="run-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      运行
+    </button>
+  </div>,
+  <iframe
+    height="500px"
+    sandbox="allow-scripts allow-same-origin allow-modals"
+    srcDoc="
+          <html lang=\\"en-US\\">
+          <head>
+            <title>Iframe</title>
+            <style>
+              undefined
+            </style>
+          </head>
+          <body>
+            
+            <script>
+              try {
+                
+              } catch(e) {
+                throw new Error('custom error');
+              }
+            </script>
+          </body>
+        </html>
+      "
+    title="output"
+    width="100%"
+  />,
+]
+`;

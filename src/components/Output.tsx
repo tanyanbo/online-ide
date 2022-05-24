@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { changeRunWhileTyping, changeIsRunning } from "../actions";
 import OUTPUT_STRING from "../shared/outputString";
-import { RootState } from "../index";
+import { RootState } from "../Root";
 
 const mapStateToProps = (state: RootState) => {
   return {

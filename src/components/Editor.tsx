@@ -7,10 +7,10 @@ import "codemirror/mode/css/css";
 import "codemirror/mode/python/python";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
-import "./Editor.css";
+import "./styles/Editor.css";
 import { change, changeIsRunning } from "../actions";
 import KEYS from "../actions/keys";
-import { RootState } from "../index";
+import { RootState } from "../Root";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -19,7 +19,15 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-const connector = connect(mapStateToProps, { change, changeIsRunning });
+const connector = connect(
+  mapStateToProps,
+  {
+    change,
+    changeIsRunning,
+  },
+  null,
+  { forwardRef: true }
+);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 

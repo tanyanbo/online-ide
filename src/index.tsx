@@ -1,20 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import { Provider } from "react-redux";
-import { legacy_createStore as createStore } from "redux";
-import combineReducers from "./reducers";
-
-const store = createStore(combineReducers);
+import Root from "./Root";
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Root>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </Provider>,
+  </Root>,
   document.getElementById("root")
 );
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
