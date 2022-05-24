@@ -1,4 +1,13 @@
-const KEYS: { [index: string]: number } = {
+type Keys = {
+  CHANGE_1: number;
+  CHANGE_RUN_WHILE_TYPING: number;
+  CHANGE_2: number;
+  CHANGE_3: number;
+  CHANGE_RUN: number;
+  CHANGE_LANGUAGES: number;
+};
+
+const KEYS: Keys = {
   CHANGE_RUN_WHILE_TYPING: 1,
   CHANGE_1: 2,
   CHANGE_2: 3,

@@ -37,7 +37,7 @@ type Props = PropsFromRedux & {
   isRunning: boolean;
   hasBar?: boolean;
   handleMouseDown?: () => void;
-  pos: string;
+  pos: "1" | "2" | "3";
 };
 
 const Editor = React.forwardRef((props: Props, ref) => {

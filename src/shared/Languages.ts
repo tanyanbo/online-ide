@@ -1,4 +1,11 @@
-const LANGUAGES: { [index: string]: readonly string[] } = {
+type Languages = {
+  HTML: readonly string[];
+  CSS: readonly string[];
+  JS: readonly string[];
+  TS: readonly string[];
+};
+
+const LANGUAGES: Languages = {
   HTML: ["HTML", "xml"],
   CSS: ["CSS", "css"],
   JS: ["JS", "javascript"],
