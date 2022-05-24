@@ -1,9 +1,27 @@
 import React, { useEffect, useRef } from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { changeRunWhileTyping, changeIsRunning } from "../actions";
-import OUTPUT_STRING from "../shared/outputString.ts";
+import OUTPUT_STRING from "../shared/outputString";
+import { RootState } from "../index";
 
-const Output = (props) => {
+const mapStateToProps = (state: RootState) => {
+  return {
+    html: state.srcDoc.html,
+    css: state.srcDoc.css,
+    js: state.srcDoc.js,
+    checked: state.checkbox.checked,
+    languages: state.languages.languages,
+  };
+};
+
+const connector = connect(mapStateToProps, {
+  changeRunWhileTyping,
+  changeIsRunning,
+});
+
+type Props = ConnectedProps<typeof connector>;
+
+const Output = (props: Props) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {
@@ -20,7 +38,7 @@ const Output = (props) => {
     props.css,
     props.js
   );
-  const changeRunState = (e) => {
+  const changeRunState = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeRunWhileTyping(e.target.checked);
   };
 
@@ -51,17 +69,4 @@ const Output = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    html: state.srcDoc.html,
-    css: state.srcDoc.css,
-    js: state.srcDoc.js,
-    checked: state.checkbox.checked,
-    languages: state.languages.languages,
-  };
-};
-
-export default connect(mapStateToProps, {
-  changeRunWhileTyping,
-  changeIsRunning,
-})(Output);
+export default connector(Output);

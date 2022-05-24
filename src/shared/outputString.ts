@@ -1,6 +1,5 @@
 type Output = {
-  "HTML+CSS+JS": (html: string, css: string, js: string) => string;
-  "HTML+CSS+TS": (html: string, css: string, js: string) => string;
+  [index: string]: (html?: string, css?: string, js?: string) => string;
 };
 
 const OUTPUT_STRING: Output = {

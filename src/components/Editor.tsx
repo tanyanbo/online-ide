@@ -24,7 +24,7 @@ const connector = connect(mapStateToProps, { change, changeIsRunning });
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type Props = PropsFromRedux & {
-  language: string[];
+  language: readonly string[];
   checked: boolean;
   isRunning: boolean;
   hasBar?: boolean;
