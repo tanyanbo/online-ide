@@ -1,7 +1,7 @@
 import KEYS from "../actions/keys";
 import { combineReducers } from "redux";
 
-const checkbox = (
+export const checkbox = (
   state: { checked: boolean } = { checked: false },
   action: { type: number; payload: boolean }
 ) => {
@@ -13,7 +13,7 @@ const checkbox = (
   }
 };
 
-const isRunning = (
+export const isRunning = (
   state = { isRunning: false },
   action: { type: number; payload: boolean }
 ) => {
@@ -25,7 +25,7 @@ const isRunning = (
   }
 };
 
-const srcDoc = (
+export const srcDoc = (
   state: { html: string; css?: string; js: string } = {
     html: "",
     js: "",
@@ -44,7 +44,7 @@ const srcDoc = (
   }
 };
 
-const languages = (
+export const languages = (
   state: { languages: string } = { languages: "HTML+CSS+JS" },
   action: { type: number; payload: string }
 ) => {
