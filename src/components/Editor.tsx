@@ -68,6 +68,7 @@ const Editor = React.forwardRef((props: Props, ref) => {
   }, [code, language, pos, checked, change, isRunning, changeIsRunning]);
 
   return (
+    // @ts-ignore
     <div className={hasBar ? "editor-with-bar" : "editor"} ref={ref}>
       {hasBar && (
         <div className="resize-bar" onMouseDown={handleMouseDown}></div>
