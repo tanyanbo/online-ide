@@ -63,4 +63,29 @@ describe("<Output />", () => {
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("renders everything correctly with language: ts", () => {
+    const component = renderer.create(
+      <Root
+        initialState={{
+          srcDoc: {
+            html: '<h1 class="first">Hello world</h1>',
+            css: `.first {
+                  color: green;
+                  }`,
+            js: `const a: number = 10;
+            document.querySelector(".first").innerText = a;`,
+          },
+          languages: {
+            languages: "HTML+CSS+TS",
+          },
+        }}
+      >
+        <Output />
+      </Root>
+    );
+
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
