@@ -13,6 +13,4 @@ describe("<Editor/>", function () {
     );
     expect(screen.getByText("HTML")).toBeInTheDocument();
   });
-
-  it("users can type into the codemirror window", () => {});
 });

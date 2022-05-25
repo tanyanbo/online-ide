@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Output /> renders correct css 1`] = `
+Array [
+  <div
+    className="buttons"
+  >
+    <form
+      className="run-checkbox"
+    >
+      <input
+        id="run"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="run"
+      >
+        边写边运行
+      </label>
+    </form>
+    <button
+      className="run-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      运行
+    </button>
+  </div>,
+  <iframe
+    height="500px"
+    sandbox="allow-scripts allow-same-origin allow-modals"
+    srcDoc="
+          <html lang=\\"en-US\\">
+          <head>
+            <title>Iframe</title>
+            <style>
+              .first {
+                    color: green;
+                  }
+            </style>
+          </head>
+          <body>
+            undefined
+            <script>
+              try {
+                undefined
+              } catch(e) {
+                throw new Error('custom error');
+              }
+            </script>
+          </body>
+        </html>
+      "
+    title="output-iframe"
+    width="100%"
+  />,
+]
+`;
+
+exports[`<Output /> renders correct html 1`] = `
+Array [
+  <div
+    className="buttons"
+  >
+    <form
+      className="run-checkbox"
+    >
+      <input
+        id="run"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="run"
+      >
+        边写边运行
+      </label>
+    </form>
+    <button
+      className="run-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      运行
+    </button>
+  </div>,
+  <iframe
+    height="500px"
+    sandbox="allow-scripts allow-same-origin allow-modals"
+    srcDoc="
+          <html lang=\\"en-US\\">
+          <head>
+            <title>Iframe</title>
+            <style>
+              undefined
+            </style>
+          </head>
+          <body>
+            <h1>Hello World!</h1>
+            <script>
+              try {
+                undefined
+              } catch(e) {
+                throw new Error('custom error');
+              }
+            </script>
+          </body>
+        </html>
+      "
+    title="output-iframe"
+    width="100%"
+  />,
+]
+`;
+
+exports[`<Output /> renders correct js 1`] = `
+Array [
+  <div
+    className="buttons"
+  >
+    <form
+      className="run-checkbox"
+    >
+      <input
+        id="run"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="run"
+      >
+        边写边运行
+      </label>
+    </form>
+    <button
+      className="run-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      运行
+    </button>
+  </div>,
+  <iframe
+    height="500px"
+    sandbox="allow-scripts allow-same-origin allow-modals"
+    srcDoc="
+          <html lang=\\"en-US\\">
+          <head>
+            <title>Iframe</title>
+            <style>
+              undefined
+            </style>
+          </head>
+          <body>
+            undefined
+            <script>
+              try {
+                console.log(10);
+              } catch(e) {
+                throw new Error('custom error');
+              }
+            </script>
+          </body>
+        </html>
+      "
+    title="output-iframe"
+    width="100%"
+  />,
+]
+`;
+
+exports[`<Output /> renders everything correctly with language: js 1`] = `
+Array [
+  <div
+    className="buttons"
+  >
+    <form
+      className="run-checkbox"
+    >
+      <input
+        id="run"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        htmlFor="run"
+      >
+        边写边运行
+      </label>
+    </form>
+    <button
+      className="run-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      运行
+    </button>
+  </div>,
+  <iframe
+    height="500px"
+    sandbox="allow-scripts allow-same-origin allow-modals"
+    srcDoc="
+          <html lang=\\"en-US\\">
+          <head>
+            <title>Iframe</title>
+            <style>
+              .first {
+                  color: green;
+                  }
+            </style>
+          </head>
+          <body>
+            <h1 class=\\"first\\">Hello world</h1>
+            <script>
+              try {
+                document.querySelector(\\".first\\").innerText = 10;
+              } catch(e) {
+                throw new Error('custom error');
+              }
+            </script>
+          </body>
+        </html>
+      "
+    title="output-iframe"
+    width="100%"
+  />,
+]
+`;

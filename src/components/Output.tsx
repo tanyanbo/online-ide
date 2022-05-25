@@ -24,13 +24,13 @@ type Props = ConnectedProps<typeof connector>;
 const Output = (props: Props) => {
   const iframeRef = useRef(null);
 
-  useEffect(() => {
-    console.log("changed");
-    console.log(iframeRef.current.contentWindow);
-    iframeRef.current.contentWindow.onerror = function () {
-      console.log("my own error from iframe srcdoc");
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log("changed");
+  //   console.log(iframeRef.current.contentWindow);
+  //   iframeRef.current.contentWindow.onerror = function () {
+  //     console.log("my own error from iframe srcdoc");
+  //   };
+  // }, []);
 
   const { changeIsRunning, changeRunWhileTyping } = props;
   const srcDoc = OUTPUT_STRING[props.languages](
@@ -61,7 +61,7 @@ const Output = (props: Props) => {
         ref={iframeRef}
         srcDoc={srcDoc}
         sandbox="allow-scripts allow-same-origin allow-modals"
-        title="output"
+        title="output-iframe"
         height="500px"
         width="100%"
       />
