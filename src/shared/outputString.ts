@@ -1,5 +1,6 @@
 type Output = {
-  [index: string]: (html?: string, css?: string, js?: string) => string;
+  "HTML+CSS+JS": (html?: string, css?: string, js?: string) => string;
+  "HTML+CSS+TS": (html?: string, css?: string, js?: string) => string;
 };
 
 const OUTPUT_STRING: Output = {
@@ -26,8 +27,9 @@ const OUTPUT_STRING: Output = {
       `;
   },
   "HTML+CSS+TS": function (html, css, tsCode) {
+    console.log(tsCode);
     // @ts-ignore
-    tsCode = tsCode.replaceAll("'", '"').replaceAll("\n", "");
+    tsCode = tsCode.replaceAll("'", '"').replaceAll("\n", " ");
     return `        
         <html lang="en-US">
           <head>

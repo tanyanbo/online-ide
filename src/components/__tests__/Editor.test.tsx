@@ -6,11 +6,10 @@ import Root from "../../Root";
 
 describe("<Editor/>", function () {
   it("has a codemirror window", () => {
-    render(
+    const { container } = render(
       <Root>
         <Editor pos="1" hasBar={false} language={LANGUAGES["HTML"]} />
       </Root>
     );
-    expect(screen.getByText("HTML")).toBeInTheDocument();
   });
 });
