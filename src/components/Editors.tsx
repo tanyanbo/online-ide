@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Editor from "./Editor";
 import LANGUAGES from "../shared/Languages";
 import { connect } from "react-redux";
@@ -33,9 +33,8 @@ const Editors = (props: { languages: string }) => {
     setContainerWidth(containerRef.current.getBoundingClientRect().width);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+  const mouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (isDragging === 0) return;
-
     const x = e.clientX;
     if (isDragging === 1) {
       centerRef.current.style.width = `${rightStart - x}px`;
@@ -57,6 +56,24 @@ const Editors = (props: { languages: string }) => {
       }px`;
     }
   };
+
+  const throttleMouseMove = () => {
+    let shouldWait: boolean = false;
+    return (e: React.MouseEvent<HTMLElement>) => {
+      if (isDragging === 0) return;
+      if (shouldWait) return;
+      mouseMove(e);
+      shouldWait = true;
+      setTimeout(() => {
+        shouldWait = false;
+      }, 20);
+    };
+  };
+
+  const mouseMoveHelper = useCallback(throttleMouseMove(), [isDragging]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) =>
+    mouseMoveHelper(e);
 
   const handleMouseUp = () => {
     setIsDragging(0);
