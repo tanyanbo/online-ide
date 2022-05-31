@@ -66,7 +66,7 @@ const Editors = (props: { languages: string }) => {
       shouldWait = true;
       setTimeout(() => {
         shouldWait = false;
-      }, 20);
+      }, 16);
     };
   };
 

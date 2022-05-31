@@ -29,7 +29,7 @@ const OUTPUT_STRING: Output = {
   "HTML+CSS+TS": function (html, css, tsCode) {
     console.log(tsCode);
     // @ts-ignore
-    tsCode = tsCode.replaceAll("'", '"').replaceAll("\n", " ");
+    tsCode = tsCode.replaceAll("'", '"');
     return `        
         <html lang="en-US">
           <head>
@@ -42,7 +42,7 @@ const OUTPUT_STRING: Output = {
             ${html}
             <script src="https://unpkg.com/typescript@latest/lib/typescriptServices.js"></script>
             <script>
-              eval(window.ts.transpile('${tsCode}'));
+              eval(window.ts.transpile(\`${tsCode}\`));
             </script>
           </body>
         </html>
