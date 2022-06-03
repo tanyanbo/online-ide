@@ -13,7 +13,7 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Error = (props: PropsFromRedux) => {
+const ErrorAlert = (props: PropsFromRedux) => {
   const { code } = props;
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -33,7 +33,7 @@ const Error = (props: PropsFromRedux) => {
 
   return (
     <>
-      {errorMessage && (
+      {errorMessage.length !== 0 && (
         <div className="error-wrap" onClick={handleErrorClick}>
           !
         </div>
@@ -42,4 +42,4 @@ const Error = (props: PropsFromRedux) => {
   );
 };
 
-export default connector(Error);
+export default connector(ErrorAlert);

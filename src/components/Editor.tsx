@@ -11,7 +11,7 @@ import "./styles/Editor.css";
 import { change, changeIsRunning } from "../actions";
 import KEYS from "../actions/keys";
 import { RootState } from "../Root";
-import Error from "./Error";
+import ErrorAlert from "./ErrorAlert";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -102,7 +102,7 @@ const Editor = React.forwardRef((props: Props, ref) => {
         }}
         onBeforeChange={onChangeCode}
       />
-      {language[0] === "JS" && <Error />}
+      {language[0] === "JS" && <ErrorAlert />}
     </div>
   );
 });
