@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./styles/Error.css";
 import { RootState } from "../Root";
 import { connect, ConnectedProps } from "react-redux";
-import * as ts from "typescript";
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -23,18 +22,25 @@ const ErrorAlert = (props: Props) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
-    try {
-      if (lang === "TS") {
-        let result: string = ts.transpile(code);
-        // eslint-disable-next-line no-eval
-        eval(result);
-      } else {
+    if (lang === "TS") {
+      import("typescript").then(({ transpile }) => {
+        let result: string = transpile(code);
+        try {
+          // eslint-disable-next-line no-eval
+          eval(result);
+          setErrorMessage("");
+        } catch (e) {
+          setErrorMessage(e.message);
+        }
+      });
+    } else {
+      try {
         // eslint-disable-next-line no-eval
         eval(code);
+        setErrorMessage("");
+      } catch (e) {
+        setErrorMessage(e.message);
       }
-      setErrorMessage("");
-    } catch (e) {
-      setErrorMessage(e.message);
     }
   }, [code, lang]);
 
