@@ -23,21 +23,19 @@ type Props = ConnectedProps<typeof connector>;
 
 const Output = (props: Props) => {
   const iframeRef = useRef(null);
+  const { changeIsRunning, changeRunWhileTyping, languages, html, css, js } =
+    props;
 
-  // useEffect(() => {
-  //   console.log("changed");
-  //   console.log(iframeRef.current.contentWindow);
-  //   iframeRef.current.contentWindow.onerror = function () {
-  //     console.log("my own error from iframe srcdoc");
-  //   };
-  // }, []);
+  const srcDoc = OUTPUT_STRING[languages](html, css, js);
 
-  const { changeIsRunning, changeRunWhileTyping } = props;
-  const srcDoc = OUTPUT_STRING[props.languages](
-    props.html,
-    props.css,
-    props.js
-  );
+  useEffect(() => {
+    console.log("changed");
+    iframeRef.current.contentWindow.onerror = function () {
+      console.log("my own error from iframe srcdoc");
+    };
+    console.log(iframeRef.current.contentWindow.onerror);
+  }, [srcDoc]);
+
   const changeRunState = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeRunWhileTyping(e.target.checked);
   };

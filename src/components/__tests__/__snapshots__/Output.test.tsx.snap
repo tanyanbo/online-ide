@@ -272,7 +272,8 @@ Array [
             <h1 class=\\"first\\">Hello world</h1>
             <script src=\\"https://unpkg.com/typescript@latest/lib/typescriptServices.js\\"></script>
             <script>
-              eval(window.ts.transpile('const a: number = 10;            document.querySelector(\\".first\\").innerText = a;'));
+              eval(window.ts.transpile(\`const a: number = 10;
+            document.querySelector(\\".first\\").innerText = a;\`));
             </script>
           </body>
         </html>

@@ -1,0 +1,12 @@
+.error-popup {
+    grid-column: 3 / 4;
+    background-color: red;
+    border: red;
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-30px);
+}

@@ -27,9 +27,7 @@ const OUTPUT_STRING: Output = {
       `;
   },
   "HTML+CSS+TS": function (html, css, tsCode) {
-    console.log(tsCode);
     // @ts-ignore
-    tsCode = tsCode.replaceAll("'", '"');
     return `        
         <html lang="en-US">
           <head>
