@@ -27,7 +27,6 @@ const OUTPUT_STRING: Output = {
       `;
   },
   "HTML+CSS+TS": function (html, css, tsCode) {
-    // @ts-ignore
     return `        
         <html lang="en-US">
           <head>

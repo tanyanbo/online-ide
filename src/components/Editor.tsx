@@ -102,7 +102,9 @@ const Editor = React.forwardRef((props: Props, ref) => {
         }}
         onBeforeChange={onChangeCode}
       />
-      {language[0] === "JS" && <ErrorAlert />}
+      {language[0] === "JS" || language[0] === "TS" ? (
+        <ErrorAlert lang={language[0]} />
+      ) : null}
     </div>
   );
 });
