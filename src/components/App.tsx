@@ -15,6 +15,18 @@ function App(props: PropsFromRedux) {
   const [chosenLanguage, setChosenLanguage] = useState<string>("");
 
   useEffect(() => {
+    const listener = (e) => {
+      e.preventDefault();
+      return (e.returnValue = "");
+    };
+    window.addEventListener("beforeunload", listener);
+
+    return () => {
+      window.removeEventListener("beforeunload", listener);
+    };
+  }, []);
+
+  useEffect(() => {
     let localStorageLanguage = localStorage.getItem("language");
     if (!localStorageLanguage) {
       localStorage.setItem("language", "JS");

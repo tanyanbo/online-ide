@@ -27,7 +27,6 @@ const ErrorAlert = (props: PropsFromRedux) => {
   }, [code]);
 
   const handleErrorClick = () => {
-    console.log("entered");
     alert(errorMessage);
   };
 
