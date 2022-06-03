@@ -28,13 +28,13 @@ const Output = (props: Props) => {
 
   const srcDoc = OUTPUT_STRING[languages](html, css, js);
 
-  useEffect(() => {
-    console.log("changed");
-    iframeRef.current.contentWindow.onerror = function () {
-      console.log("my own error from iframe srcdoc");
-    };
-    console.log(iframeRef.current.contentWindow.onerror);
-  }, [srcDoc]);
+  // useEffect(() => {
+  //   console.log("changed");
+  //   iframeRef.current.contentWindow.onerror = function () {
+  //     console.log("my own error from iframe srcdoc");
+  //   };
+  //   console.log(iframeRef.current.contentWindow.onerror);
+  // }, [srcDoc]);
 
   const changeRunState = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeRunWhileTyping(e.target.checked);

@@ -1,4 +1,4 @@
-.error-popup {
+.error-wrap {
     grid-column: 3 / 4;
     background-color: red;
     border: red;
@@ -9,4 +9,23 @@
     justify-content: center;
     align-items: center;
     transform: translateY(-30px);
+    position: relative;
+}
+
+.error-wrap .error-content {
+    display: none;
+    position: absolute;
+    /*bottom: 5%;*/
+    /*left: 5%;*/
+    /*right: 5%;*/
+    top: -100%;
+    background-color: #000;
+    padding: .5em;
+    font-size: 5px;
+    color: #fff;
+}
+
+.error-wrap:hover .error-content {
+    display: block;
+    width: 100px;
 }
