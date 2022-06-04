@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorAlert /> alerts the right message where there is an error in the typescript code 1`] = `
+<div
+  className="editor-with-bar"
+>
+  <div
+    className="resize-bar"
+  />
+  <div
+    className="editor-top"
+  >
+    <h3>
+      TS
+    </h3>
+    <button
+      className="reset-button"
+      onClick={[Function]}
+    >
+      ❌
+    </button>
+  </div>
+  <div
+    className="react-codemirror2 code-mirror"
+  />
+  <div
+    className="error-wrap"
+    onClick={[Function]}
+  >
+    !
+  </div>
+</div>
+`;
+
+exports[`<ErrorAlert /> does not show red exclamation mark when there are no errors in the typescript code 1`] = `
+<div
+  className="editor-with-bar"
+>
+  <div
+    className="resize-bar"
+  />
+  <div
+    className="editor-top"
+  >
+    <h3>
+      TS
+    </h3>
+    <button
+      className="reset-button"
+      onClick={[Function]}
+    >
+      ❌
+    </button>
+  </div>
+  <div
+    className="react-codemirror2 code-mirror"
+  />
+</div>
+`;
+
+exports[`<ErrorAlert /> shows red exclamation mark when there is an error in the typescript code 1`] = `
+<div
+  className="editor-with-bar"
+>
+  <div
+    className="resize-bar"
+  />
+  <div
+    className="editor-top"
+  >
+    <h3>
+      TS
+    </h3>
+    <button
+      className="reset-button"
+      onClick={[Function]}
+    >
+      ❌
+    </button>
+  </div>
+  <div
+    className="react-codemirror2 code-mirror"
+  />
+  <div
+    className="error-wrap"
+    onClick={[Function]}
+  >
+    !
+  </div>
+</div>
+`;
